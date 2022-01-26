@@ -1,5 +1,5 @@
 //
-//	code for Theorem 2.1 a) for N=33
+//	code for Theorem 2.2 for N=33
 //
 
 
