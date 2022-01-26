@@ -1,0 +1,60 @@
+//
+//	code for Theorem 2.1 a) for N=48
+//
+
+
+
+
+
+C:=SmallModularCurve(48);		//gives a modular curve X_0(48)
+SimplifiedModel(C);			//gives C=X_0(48) in the form y^2=f_48(x)
+
+
+
+
+
+A:={};
+S:=[0..128];
+for m in S do
+    for n in S do
+        if ((m mod 2) ne 0) and ((n mod 2) ne 0) then					//because (m,n)=1
+            f:=m^8 + 14*m^4*n^4 + n^8;							//this is n^8d=Ds^2 from (2), obtained by putting x=m/n in SimplifiedModel(C) from above and multiplying with the denominator n^8
+            A:=A join {f mod 128};							//we put the residues modulo 128 in the set A
+        end if;
+    end for;
+end for;
+A;											//in the end the set A will contain all possible values of Ds^2 modulo 128, for Ds^2 from (2)
+
+
+
+
+
+A:={};
+S:=[0..3];
+for m in S do
+    for n in S do
+        if ((m mod 3) ne 0) or ((n mod 3) ne 0) then					//because (m,n)=1
+            f:=m^8 + 14*m^4*n^4 + n^8;							//this is n^8d=Ds^2 from (2), obtained by putting x=m/n in SimplifiedModel(C) from above and multiplying with the denominator n^8
+            A:=A join {f mod 3};							//we put the residues modulo 3 in the set A
+        end if;
+    end for;
+end for;
+A;											//in the end the set A will contain all possible values of Ds^2 modulo 3, for Ds^2 from (2)
+
+
+
+
+
+A:={};
+S:=[0..5];
+for m in S do
+    for n in S do
+        if ((m mod 5) ne 0) or ((n mod 5) ne 0) then					//because (m,n)=1
+            f:=m^8 + 14*m^4*n^4 + n^8;							//this is n^8d=Ds^2 from (2), obtained by putting x=m/n in SimplifiedModel(C) from above and multiplying with the denominator n^8
+            A:=A join {f mod 5};							//we put the residues modulo 5 in the set A
+        end if;
+    end for;
+end for;
+A;											//in the end the set A will contain all possible values of Ds^2 modulo 5, for Ds^2 from (2)
+
+
