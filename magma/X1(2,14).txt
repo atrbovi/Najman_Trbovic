@@ -1,0 +1,47 @@
+//
+//	Model for E_u with torsion C2 x C14, mentioned at the beginning of Chapter 3, along with
+//	factorizations of the j-invariant, c_4-invariant and discriminant of E_u
+//	and factorization of f in F_2 used in Lemma 3.3
+//
+
+
+
+
+
+K<u>:=FunctionField(Rationals());
+_<x>:=PolynomialRing(K);
+F<v>:=ext<K|((u^3+u^2-2*u-1)*x*(x+1) +(x^3+x^2-2*x-1)*u*(u+1))>;
+
+// this part is from https://math.mit.edu/~drew/X1/X1_2_14.txt
+q := (u+v)/(v-u);									
+t := (u-v)*(u+v)*(u+v+2)/(u^3+u^2*v+2*u^2+u*v^2+2*u*v+v^3+2*v^2);
+E := EllipticCurve([0,t^2-2*q*t-2,0,-(t^2-1)*(q*t+1)^2,0]);
+E;											// this is the elliptic curve E=E_u mentioned in chapter 3
+
+
+// factorization of the j-invariant of the elliptic curve E from above
+den_j:=Denominator(jInvariant(E));						 
+num_j:=Denominator(1/jInvariant(E));
+Factorization(den_j);
+Factorization(num_j);
+
+// factorization of the c_4-invariant of the elliptic curve E from above
+den_c4:=Denominator(cInvariants(E)[1]);
+num_c4:=Denominator(1/cInvariants(E)[1]);
+Factorization(den_c4);
+Factorization(num_c4);
+
+// factorization of the discriminant of the elliptic curve E from above
+den_D:=Denominator(Discriminant(E));
+num_D:=Denominator(1/Discriminant(E));
+Factorization(den_D);
+Factorization(num_D);
+
+
+
+
+
+// factorization of f in F_2 used in Lemma 3.3
+K<u,v>:=PolynomialRing(FiniteField(2),2);
+f:=(u^3 + u^2 - 2*u - 1)*v*(v + 1)+(v^3 + v^2 - 2*v - 1)*u*(u + 1);
+Factorization(f);

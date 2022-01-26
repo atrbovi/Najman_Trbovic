@@ -1,0 +1,27 @@
+//
+//	code for Theorem 2.2 for N=46
+//
+
+
+
+
+
+C:=SmallModularCurve(46);		//gives a modular curve X_0(46)
+SimplifiedModel(C);			//gives C=X_0(46) in the form y^2=f_46(x)
+
+
+
+
+
+A:={};
+S:=[0..512];
+for m in S do
+    for n in S do
+        if ((m mod 2) ne 0) or ((n mod 2) ne 0) then							//because (m,n)=1
+            f:=m^12-2*m^11*n+5*m^10*n^2+6*m^9*n^3-26*m^8*n^4+84*m^7*n^5-
+		113*m^6*n^6+134*m^5*n^7-64*m^4*n^8+26*m^3*n^9+12*m^2*n^10+8*m*n^11-7*n^12;		//this is n^12d=Ds^2 from (2), obtained by putting x=m/n in SimplifiedModel(C) from above and multiplying with the denominator n^12
+            A:=A join {f mod 512};									//we put the residues modulo 512 in the set A
+        end if;
+    end for;
+end for;
+A;													//in the end the set A will contain all possible values of Ds^2 modulo 512, for Ds^2 from (2)

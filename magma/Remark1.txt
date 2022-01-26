@@ -1,0 +1,20 @@
+//
+// with the notation from Proposition 1.1 in "E. Ozman: Points on quadratic twists of X_0(N)",
+// the function Ozman(p,N) checks whether p is in the set S_N
+//
+
+function Ozman(p,N)
+   _<x>:=PolynomialRing(Integers());
+   M:=NumberField(x^2+N);
+   h:=HilbertClassPolynomial(Discriminant(M));
+   B:=NumberField(h);
+   H:=HilbertClassField(M);
+   OB:=RingOfIntegers(B);
+   fac1:=Factorization(p*OB);
+   tr1:=false;
+   for i:=1 to #fac1 do tr1:=tr1 or (Degree(fac1[i,1]) eq 1); end for;
+   tr2:=(#Factorization(p*RingOfIntegers(H)) div #Factorization(p*RingOfIntegers(M))) eq Degree(H);
+   return tr1 and tr2;
+end function;
+
+Ozman(2,22);			// checks whether p=2 is in the set S_22

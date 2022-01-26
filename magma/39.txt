@@ -1,0 +1,43 @@
+//
+//	code for Theorem 2.2 for N=39
+//
+
+
+
+
+
+C:=SmallModularCurve(39);		//gives a modular curve X_0(39)
+SimplifiedModel(C);			//gives C=X_0(39) in the form y^2=f_39(x)
+
+
+
+
+
+A:={};
+S:=[0..4];
+for m in S do
+    for n in S do
+        if ((m mod 2) ne 0) or ((n mod 2) ne 0) then							//because (m,n)=1
+            f:=m^8-6*m^7*n+3*m^6*n^2+12*m^5*n^3-23*m^4*n^4+12*m^3*n^5+3*m^2*n^6-6*m*n^7+n^8;		//this is n^8d=Ds^2 from (2), obtained by putting x=m/n in SimplifiedModel(C) from above and multiplying with the denominator n^8
+            A:=A join {f mod 4};									//we put the residues modulo 4 in the set A
+        end if;
+    end for;
+end for;
+A;													//in the end the set A will contain all possible values of Ds^2 modulo 4, for Ds^2 from (2)
+
+
+
+
+
+A:={};
+S:=[0..13];
+for m in S do
+    for n in S do
+        if ((m mod 13) ne 0) or ((n mod 13) ne 0) then							//because (m,n)=1
+            f:=m^8-6*m^7*n+3*m^6*n^2+12*m^5*n^3-23*m^4*n^4+12*m^3*n^5+3*m^2*n^6-6*m*n^7+n^8;		//this is n^8d=Ds^2 from (2), obtained by putting x=m/n in SimplifiedModel(C) from above and multiplying with the denominator n^8
+            A:=A join {f mod 13};									//we put the residues modulo 13 in the set A
+        end if;
+    end for;
+end for;
+A;													//in the end the set A will contain all possible values of Ds^2 modulo 13, for Ds^2 from (2)
+

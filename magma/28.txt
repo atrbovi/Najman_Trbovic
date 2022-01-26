@@ -1,0 +1,42 @@
+//
+//	code for Theorem 2.2 for N=28
+//
+
+
+
+
+
+C:=SmallModularCurve(28);		//gives a modular curve X_0(28)
+SimplifiedModel(C);			//gives C=X_0(28) in the form y^2=f_28(x)
+
+
+
+
+
+A:={};
+S:=[0..3];
+for m in S do
+    for n in S do
+        if ((m mod 3) ne 0) or ((n mod 3) ne 0) then					//because (m,n)=1
+            f:=4*m^6-12*m^5*n+25*m^4*n^2-30*m^3*n^3+25*m^2*n^4-12*m*n^5+4*n^6;		//this is n^6d=Ds^2 from (2), obtained by putting x=m/n in SimplifiedModel(C) from above and multiplying with the denominator n^6
+            A:=A join {f mod 3};							//we put the residues modulo 128 in the set A
+        end if;
+    end for;
+end for;
+A;											//in the end the set A will contain all possible values of Ds^2 modulo 128, for Ds^2 from (2)
+
+
+
+
+
+A:={};
+S:=[0..49];
+for m in S do
+    for n in S do
+        if ((m mod 7) ne 0) or ((n mod 7) ne 0) then					//because (m,n)=1
+            f:=4*m^6-12*m^5*n+25*m^4*n^2-30*m^3*n^3+25*m^2*n^4-12*m*n^5+4*n^6;		//this is n^6d=Ds^2 from (2), obtained by putting x=m/n in SimplifiedModel(C) from above and multiplying with the denominator n^6
+            A:=A join {f mod 49};							//we put the residues modulo 49 in the set A
+        end if;
+    end for;
+end for;
+A;											//in the end the set A will contain all possible values of Ds^2 modulo 49, for Ds^2 from (2)

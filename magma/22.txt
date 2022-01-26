@@ -1,0 +1,26 @@
+//
+//	code for Theorem 2.2 for N=22
+//
+
+
+
+
+
+C:=SmallModularCurve(22);		//gives a modular curve X_0(22)
+SimplifiedModel(C);			//gives C=X_0(22) in the form y^2=f_22(x)
+
+
+
+
+
+A:={};
+S:=[0..512];
+for m in S do
+    for n in S do
+        if ((m mod 2) ne 0) or ((n mod 2) ne 0) then				//because (m,n)=1
+            f:=m^6-4*m^4*n^2+20*m^3*n^3-40*m^2*n^4+48*m*n^5-32*n^6;		//this is n^6d=Ds^2 in (2), obtained by putting x=m/n in SimplifiedModel(C) from above and multiplying with the denominator n^6
+            A:=A join {f mod 512};						//we put the residues modulo 512 in the set A
+        end if;
+    end for;
+end for;
+A;										//in the end the set A will contain all possible values of Ds^2 modulo 512, for Ds^2 from (2)
